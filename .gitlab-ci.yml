@@ -1,0 +1,41 @@
+image: node:8.9.4
+
+cache:
+  key: one-key-to-roll-them-all-and-quickly-smoke
+  paths:
+  - node_modules/
+
+stages:
+  - test
+
+test:
+  stage: test
+  before_script:
+    # Add Google Chrome to aptitude's (package manager) sources
+    - echo "deb http://dl.google.com/linux/chrome/deb/ stable main" | tee -a /etc/apt/sources.list
+    # Fetch Chrome's PGP keys for secure installation
+    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+    # Update aptitude's package sources
+    - apt-get -qq update -y
+    # Install latest Chrome stable, Xvfb packages
+    - apt-get -qq install -y google-chrome-stable xvfb gtk2-engines-pixbuf xfonts-cyrillic xfonts-100dpi xfonts-75dpi xfonts-base xfonts-scalable imagemagick x11-apps default-jre
+    # Launch Xvfb
+    - Xvfb :0 -ac -screen 0 1024x768x24 &
+    # Export display for Chrome
+    - export DISPLAY=:99
+    # karma CI conf - chrome headless
+    - cp karma.conf_ci.js karma.conf.js
+    # Install AngularJS CLI exclusively
+    # Add --unsafe-perm to resolve problems with node-gyp infinite loop on Docker
+    # fix npm/bower issue
+    - sed -i 's/bower install/bower install --allow-root/g' package.json
+    - npm install --unsafe-perm
+    # Download Selenium server JAR, drivers for Chrome
+    - node ./node_modules/.bin/webdriver-manager update
+  script:
+    # unit tests
+    - npm run test-single-run
+    # e2e tests: disable by now due to errors/bugs
+    # - (npm start > /dev/null &) && (npm run protractor)
+  only:
+    - master
