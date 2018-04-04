@@ -22,5 +22,3 @@ Simply run
 `npm install`
 
 and watch universe collapse.
-
-
