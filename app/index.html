@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="Cineboard" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,14 +15,20 @@
   <ul class="menu">
     <li><a href="#!/view1">view1</a></li>
     <li><a href="#!/view2">view2</a></li>
+    <li><a href="#!/categories">Categories</a></li>
+    <li><a href="#!/libraries">Libraries</a></li>
+    <li><a href="#!/users">Users</a></li>
   </ul>
 
   <div ng-view></div>
 
   <div>Cineboard DashBoard: v<span app-version></span></div>
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  <!-- In production use: check https://cdnjs.com/libraries/angular.js/1.6.9
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular.min.js" integrity="sha256-7ngBGhPctUEyXLD6ha53TFUaqhBCnXFOi712aqBq094="
+  crossorigin="anonymous"></script>>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular-route.min.js" integrity="sha256-MZn3qSbJC3ofkTSdXaHYrPr5etI6xij07/pAK6Ug228="
+  crossorigin="anonymous"></script>
   -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
@@ -30,6 +36,12 @@
   <script src="app.config.local.js"></script>
   <script src="view1/view1.js"></script>
   <script src="view2/view2.js"></script>
+  <script src="services/CategoriesService.js"></script>
+  <script src="services/LibrariesService.js"></script>
+  <script src="services/UsersService.js"></script>
+  <script src="components/categories/categories.js"></script>
+  <script src="components/libraries/libraries.js"></script>
+  <script src="components/users/users.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
