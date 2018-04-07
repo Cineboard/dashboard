@@ -1,7 +1,5 @@
 'use strict';
 
-var app;
-
 app.constant('CONFIG', {
-    'API_URL': '__CORS_DOMAIN__'
+    'API_URL': '__APIURL__'
 });

@@ -1,8 +1,13 @@
+[![pipeline status](https://gitlab.com/cineboard/dashboard/badges/master/pipeline.svg)](https://gitlab.com/cineboard/dashboard/commits/master)
+
+[![coverage report](https://gitlab.com/cineboard/dashboard/badges/master/coverage.svg)](https://gitlab.com/cineboard/dashboard/commits/master)
+
+
 # CineBoard WebGUI
 
 based on AngularJS seed skeleton [angular-seed](https://github.com/angular/angular-seed)
 
-for more details check README-angular-seed.md
+for more details check original readme.
 
 ## Getting Started
 
