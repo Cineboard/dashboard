@@ -1,7 +1,5 @@
 'use strict';
 
-var app;
-
 app.factory('UsersService', function ($http, CONFIG) {
     return {
         getUsers: function () {
