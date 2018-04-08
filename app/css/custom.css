@@ -23,3 +23,46 @@
   content: "|";
   padding-right: 0.3em;
 }
+
+body{
+  text-align: center;
+  background-color: #EEE !important;
+}
+
+.currentUser{
+  position: absolute;
+  right: 2em;
+  top: 1.5em;
+}
+
+.dt, .dt-body{
+  width: 100% !important;
+}
+.users .dt{
+  width: 200px !important;
+}
+
+.btn{
+  background: #F79522;
+  color: white;
+  padding: 10px 15px;
+  margin: 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: none;
+}
+.btn:hover{
+  background: rgb(225, 121, 2);
+}
+.menu a{
+  color: #333;
+}
+.menu a:hover{
+  color: rgb(225, 121, 2);
+}
+.selected-box ul{
+  padding: 0;
+}
+.selected-box li{
+  list-style-type: none;
+}

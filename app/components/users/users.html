@@ -1,7 +1,11 @@
-<div ng-app="Cineboard">
+<div ng-app="Cineboard" class="users">
+    <h2>Select user</h2>
     <div ng-controller="UsersController">
         <div class="wrapper">
             <dtable options="options" rows="usersData" on-row-click="setUser(row)" class="material"></dtable>
         </div>
     </div>
+    <p>
+        <a class="btn btn-primary" ng-href="#!/new-user">Add user</a>
+    </p>
 </div>

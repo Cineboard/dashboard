@@ -9,6 +9,13 @@ angular.module('Cineboard.users', ['ngRoute', 'data-table'])
         });
     }])
 
+    .config(['$routeProvider', function ($routeProvider) {
+        $routeProvider.when('/new-user', {
+            templateUrl: 'components/users/new-user.html',
+            controller: 'UsersController'
+        });
+    }])
+
     .controller('UsersController', function ($rootScope, $scope, UsersService, $location) {
         $scope.options = {
             rowHeight: 50,
@@ -20,12 +27,6 @@ angular.module('Cineboard.users', ['ngRoute', 'data-table'])
                 name: "Name",
                 prop: "name",
                 width: 200,
-            }, {
-                name: "id",
-                prop: "id"
-            }, {
-                name: "Updated",
-                prop: "updated_at"
             }]
         };
         $scope.onRowClick = function (row) {
@@ -40,4 +41,11 @@ angular.module('Cineboard.users', ['ngRoute', 'data-table'])
             $rootScope.currentUser = user;
             $location.path('/libraries');
         };
+        $scope.saveUser = function(user){
+            if(user.name){
+                UsersService.saveUser(user.name).then(function (usersData) {
+                    $location.path('/');
+                });
+            }
+        }
     });
