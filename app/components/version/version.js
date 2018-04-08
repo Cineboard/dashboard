@@ -5,4 +5,4 @@ angular.module('Cineboard.version', [
   'Cineboard.version.version-directive'
 ])
 
-.value('version', '0.1');
+.value('version', '0.3');
