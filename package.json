@@ -1,7 +1,7 @@
 {
   "name": "cineboard",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.3.0",
   "description": "a dashboard for cineboard",
   "repository": "https://gitlab.com/Cineboard/dashboard",
   "license": "BSD3Clause",
@@ -28,8 +28,7 @@
     "preupdate-webdriver": "npm install",
     "update-webdriver": "webdriver-manager update",
     "preprotractor": "npm run update-webdriver",
-    "protractor": "protractor e2e-tests/protractor.conf.js",
-    "update-index-async": "node -e \"var fs=require('fs'),indexFile='app/index-async.html',loaderFile='app/bower_components/angular-loader/angular-loader.min.js',loaderText=fs.readFileSync(loaderFile,'utf-8').split(/sourceMappingURL=angular-loader.min.js.map/).join('sourceMappingURL=bower_components/angular-loader/angular-loader.min.js.map'),indexText=fs.readFileSync(indexFile,'utf-8').split(/\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/).join('//@@NG_LOADER_START@@\\n'+loaderText+'    //@@NG_LOADER_END@@');fs.writeFileSync(indexFile,indexText);\""
+    "protractor": "protractor e2e-tests/protractor.conf.js"
   },
   "dependencies": {
     "jshint": "^2.9.5"

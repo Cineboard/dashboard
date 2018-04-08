@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="Cineboard" class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="Cineboard" class="no-js">
+<!--<![endif]-->
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,21 +11,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="app.css">
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-3.5.0.min.js"></script>
+  <link rel="stylesheet" href="bower_components/angular-data-table/release/dataTable.css">
+  <link rel="stylesheet" href="bower_components/angular-data-table/release/material.css">
+  <link rel="stylesheet" href="bower_components/angular-material-icons/angular-material-icons.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/libraries.css">
+  <link rel="stylesheet" href="css/users.css">
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
+
 <body>
-  <ul class="menu">
-    <li><a href="#!/view1">view1</a></li>
-    <li><a href="#!/view2">view2</a></li>
-    <li><a href="#!/categories">Categories</a></li>
-    <li><a href="#!/libraries">Libraries</a></li>
-    <li><a href="#!/users">Users</a></li>
+  <ul class="menu" ng-if="currentUser">
+    <li>
+      <a href="#!/view1">view1</a>
+    </li>
+    <li>
+      <a href="#!/view2">view2</a>
+    </li>
+    <li>
+      <a href="#!/categories">Categories</a>
+    </li>
+    <li>
+      <a href="#!/libraries">Libraries</a>
+    </li>
+    <li>
+      <a href="#!/">Users</a>
+    </li>
   </ul>
+  <div>Current User: {{ currentUser.name }}</div>
 
   <div ng-view></div>
 
-  <div>Cineboard DashBoard: v<span app-version></span></div>
+  <div>Cineboard DashBoard: v
+    <span app-version></span>
+  </div>
 
   <!-- In production use: check https://cdnjs.com/libraries/angular.js/1.6.9
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular.min.js" integrity="sha256-7ngBGhPctUEyXLD6ha53TFUaqhBCnXFOi712aqBq094="
@@ -32,6 +54,8 @@
   -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-data-table/release/dataTable.min.js"></script>
+  <script src="bower_components/angular-material-icons/angular-material-icons.min.js"></script>
   <script src="app.js"></script>
   <script src="app.config.local.js"></script>
   <script src="view1/view1.js"></script>
@@ -46,4 +70,5 @@
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
 </body>
+
 </html>
