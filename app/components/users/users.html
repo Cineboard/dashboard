@@ -1,8 +1,7 @@
-<p>This is the partial for Users.</p>
-<p>
-    Showing Users
-</p>
-
-<ul>
-    <li ng-repeat="item in usersData">{{ item.name }}</li>
-</ul>
+<div ng-app="Cineboard">
+    <div ng-controller="UsersController">
+        <div class="wrapper">
+            <dtable options="options" rows="usersData" on-row-click="setUser(row)" class="material"></dtable>
+        </div>
+    </div>
+</div>
