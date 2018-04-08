@@ -5,7 +5,9 @@
                 selected="selected"></dtable>
             <div class="selected-box">
                 <h5>Selected list</h5>
-                <code>{{selected}}</code>
+                <ul>
+                    <li ng-repeat="item in selected">{{ item.title }}</li>
+                </ul>
             </div>
         </div>
     </div>
