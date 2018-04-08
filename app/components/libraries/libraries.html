@@ -1,8 +1,11 @@
-<p>This is the partial for Libraries.</p>
-<p>
-    Showing Libraries
-</p>
-
-<ul>
-    <li ng-repeat="item in librariesData">{{ item.title }}</li>
-</ul>
+<div ng-app="Cineboard">
+    <div ng-controller="LibrariesController">
+        <div class="wrapper">
+            <dtable options="options" rows="librariesData" on-row-click="onRowClick(row)" class="material" on-select="onSelect(row)"
+                selected="selected"></dtable>
+            <div class="selected-box">
+                <h5>Selected list</h5>
+                <code>{{selected}}</code>
+            </div>
+        </div>
+    </div>
