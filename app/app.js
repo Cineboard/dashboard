@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('Cineboard', [
   'ngRoute',
+  'data-table',
   'Cineboard.view1',
   'Cineboard.view2',
   'Cineboard.categories',
@@ -11,8 +12,8 @@ var app = angular.module('Cineboard', [
   'Cineboard.version'
 ]).
 
-config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $locationProvider.hashPrefix('!');
+  config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
+    $locationProvider.hashPrefix('!');
 
-  $routeProvider.otherwise({redirectTo: '/#/'});
-}]);
+    $routeProvider.otherwise({ redirectTo: '/users' });
+  }]);
