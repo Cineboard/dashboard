@@ -1,11 +1,15 @@
 'use strict';
 
-app.factory('LibrariesService', function ($http, CONFIG) {
+app.factory('LibrariesService', function ($rootScope, $http, CONFIG, $location) {
     return {
         getLibraries: function () {
-            return $http.get(CONFIG.API_URL + '/libraries')
+            if (!$rootScope.currentUser) {
+                $location.path('/');
+                return false;
+            }
+            return $http.get(CONFIG.API_URL + '/users/' + $rootScope.currentUser.id + '/libraries')
                 .then(function (result) {
-                    return result.data;
+                    return result.data.libraries;
                 });
         }
     };
