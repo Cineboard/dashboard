@@ -2,6 +2,7 @@
 
 [![coverage report](https://gitlab.com/cineboard/dashboard/badges/master/coverage.svg)](https://gitlab.com/cineboard/dashboard/commits/master)
 
+![logo](logo.png "Cineboard by AessE")
 
 # CineBoard WebGUI
 
@@ -27,3 +28,22 @@ Simply run
 `npm install`
 
 and watch universe collapse.
+
+
+## Authors
+
+* **GB 'gionniboy' Pullarà** - [Firegarden](https://firegarden.co)
+
+
+## Acknowledgments
+
+Cineboard graphics&design by Alessia Sferrazza, used with permission.
+
+
+## License
+This project is licensed under the BSD 3-Clause License - see the [LICENSE](LICENSE) file for details
+
+
+**have fun && bugs hunt && issue || PR !**
+
+
