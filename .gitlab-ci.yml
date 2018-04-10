@@ -44,29 +44,27 @@ test:node8.9:
     - master
     - devel
 
-# deploy_demo:
-#   stage: deploy
-#   dependencies:
-#     - test:node8.9
-#   script:
-#     # Update package sources
-#     - apt-get -qq update -y
-#     - apt-get -qq install -y openssh-client
-#     # run ssh-agent
-#     - eval $(ssh-agent -s)
-#     # use CI SECRETS VAR
-#     # add ssh key stored in SSH_KEY_TESTING_ENV variable to the agent store
-#     - ssh-add <(echo "$SSH_KEY_DEMO")
-#     - SSHUSER=$(echo $SSH_USER_DEMO)
-#     - DESTPATH=$(echo $DESTINATION_PATH)
-#     # disable host key checking (NOTE: makes you susceptible to man-in-the-middle attacks)
-#     # WARNING: use only in docker container, if you use it with shell you will overwrite your user's ssh config
-#     - mkdir -p ~/.ssh
-#     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-#     - scp -r app "$SSHUSER"@cineboard.firegarden.co:"$DESTPATH"
-#     - echo yay
-#   environment:
-#     name: demo
-#     url: https://dash.cineboard.firegarden.co
-#   only:
-#   - master
+deploy_demo:
+  stage: deploy
+  dependencies:
+    - test:node8.9
+  script:
+    # Update package sources
+    - apt-get -qq update -y
+    - apt-get -qq install -y openssh-client
+    # run ssh-agent
+    - eval $(ssh-agent -s)
+    # use CI SECRETS VAR
+    # add ssh key stored in SSH_KEY_TESTING_ENV variable to the agent store
+    - ssh-add - <<<"$SSH_KEY_DEMO"
+    # disable host key checking (NOTE: makes you susceptible to man-in-the-middle attacks)
+    # WARNING: use only in docker container, if you use it with shell you will overwrite your user's ssh config
+    - mkdir -p ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - ssh $SSHUSER@cineboard.firegarden.co bash deploy.sh
+    - echo yay
+  environment:
+    name: demo
+    url: https://dash.cineboard.firegarden.co
+  only:
+  - master
