@@ -15,34 +15,36 @@
   content: "]";
 }
 
-.menu > li {
+.menu>li {
   display: inline;
 }
 
-.menu > li + li:before {
+.menu>li+li:before {
   content: "|";
   padding-right: 0.3em;
 }
 
-body{
+body {
   text-align: center;
   background-color: #EEE !important;
 }
 
-.currentUser{
+.currentUser {
   position: absolute;
   right: 2em;
   top: 1.5em;
 }
 
-.dt, .dt-body{
+.dt,
+.dt-body {
   width: 100% !important;
 }
-.users .dt{
+
+.users .dt {
   width: 200px !important;
 }
 
-.btn{
+.btn {
   background: #F79522;
   color: white;
   padding: 10px 15px;
@@ -51,18 +53,57 @@ body{
   text-decoration: none;
   border: none;
 }
-.btn:hover{
+
+.btn:hover {
   background: rgb(225, 121, 2);
 }
-.menu a{
+
+.menu a {
   color: #333;
 }
-.menu a:hover{
+
+.menu a:hover {
   color: rgb(225, 121, 2);
 }
-.selected-box ul{
+
+.selected-box ul {
   padding: 0;
 }
-.selected-box li{
+
+.selected-box li {
   list-style-type: none;
+}
+
+#globalLoader {
+  /* background-color: #262626 ; */
+  background-color: rgba(0, 0, 0, 0.4);
+  bottom: 0px;
+  left: 0px;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  z-index: 999999;
+}
+
+#globalLoader div.messaging {
+  color: #FFFFFF;
+  font-family: monospace;
+  left: 0px;
+  margin-top: -37px;
+  position: absolute;
+  right: 0px;
+  text-align: center;
+  top: 50%;
+}
+
+#globalLoader h1 {
+  font-size: 26px;
+  line-height: 35px;
+  margin: 0px 0px 20px 0px;
+}
+
+#globalLoader p {
+  font-size: 18px;
+  line-height: 14px;
+  margin: 0px 0px 0px 0px;
 }
