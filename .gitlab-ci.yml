@@ -61,7 +61,7 @@ deploy_demo:
     # WARNING: use only in docker container, if you use it with shell you will overwrite your user's ssh config
     - mkdir -p ~/.ssh
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-    - ssh $SSHUSER@cineboard.firegarden.co bash deploy.sh
+    - ssh $SSH_USER_DEMO@cineboard.firegarden.co bash deploy.sh
     - echo yay
   environment:
     name: demo
