@@ -96,10 +96,63 @@ angular.module('Cineboard.categories', ['ngRoute'])
             console.log('ROW CLICKED', row);
         };
         $scope.doUndo = function (row) {
-            console.log('UNDO CLICKED', row);
+            console.log('UNDO CLICKED', row.id, row.name);
+
+            CategoriesService
+                .undeleteCategory(row.id, row.name)
+                .then(
+                    function (response) {
+                        console.log('undelete response', response);
+
+                        CategoriesService
+                            .getCategories()
+                            .then(function (categoriesData) {
+                                $scope.categoriesData = categoriesData.sort(
+                                    function compareObject(objA, objB) {
+                                        if (objA.name < objB.name) {
+                                            return -1;
+                                        }
+
+                                        if (objA.name > objB.name) {
+                                            return 1;
+                                        }
+
+                                        return 0;
+                                    }
+                                );
+                                console.log(categoriesData);
+                            });
+                    }
+                )
         }
         $scope.doDelete = function (row) {
-            console.log('DELETE CLICKED', row);
+            console.log('DELETE CLICKED', row.id, row.name);
+            CategoriesService
+                .deleteCategory(row.id, row.name)
+                .then(
+                    function (response) {
+                        console.log('delete response', response);
+
+                        CategoriesService
+                            .getCategories()
+                            .then(function (categoriesData) {
+                                $scope.categoriesData = categoriesData.sort(
+                                    function compareObject(objA, objB) {
+                                        if (objA.name < objB.name) {
+                                            return -1;
+                                        }
+
+                                        if (objA.name > objB.name) {
+                                            return 1;
+                                        }
+
+                                        return 0;
+                                    }
+                                );
+                                console.log(categoriesData);
+                            });
+                    }
+                )
         }
 
         CategoriesService
