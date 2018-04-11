@@ -10,8 +10,114 @@ angular.module('Cineboard.categories', ['ngRoute'])
     }])
 
     .controller('CategoriesController', ['$scope', 'CategoriesService', function ($scope, CategoriesService) {
-        CategoriesService.getCategories().then(function (categoriesData) {
-            $scope.categoriesData = categoriesData;
-            console.log(categoriesData);
-        });
+        /**
+         * Categories default empty state
+         */
+        $scope.categoriesData = [];
+
+        /**
+         * dTable config options
+         */
+        $scope.options = {
+            rowHeight: 100,
+            footerHeight: false,
+            scrollbarV: false,
+            columnMode: 'force',
+            headerHeight: 50,
+            columns: [
+                // {
+                //     name: "#",
+                //     prop: "id"
+                // },
+                {
+                    name: "Category",
+                    prop: "name",
+                    cellRenderer: function (scope) {
+                        if (scope.$row.deleted_at !== null) {
+                            return '<span class="row-deleted">{{$cell}}</span>';
+                        } else {
+                            return '<span>{{$cell}}</span>';
+                        }
+                    }
+                },
+                {
+                    name: "Created at",
+                    prop: "created_at",
+                    cellRenderer: function (scope) {
+                        if (scope.$row.deleted_at !== null) {
+                            return '<span class="row-deleted">{{$cell}}</span>';
+                        } else {
+                            return '<span>{{$cell}}</span>';
+                        }
+                    }
+                },
+                {
+                    name: "Updated at",
+                    prop: "updated_at",
+                    cellRenderer: function (scope) {
+                        if (scope.$row.deleted_at !== null) {
+                            return '<span class="row-deleted">{{$cell}}</span>';
+                        } else {
+                            return '<span>{{$cell}}</span>';
+                        }
+                    }
+                },
+                {
+                    name: "Deleted at",
+                    prop: "deleted_at",
+                    cellRenderer: function (scope) {
+                        if (scope.$row.deleted_at !== null) {
+                            return '<span class="row-deleted">{{$cell}}</span>';
+                        } else {
+                            return '<span> - </span>';
+                        }
+                    }
+                },
+                {
+                    // name: "controls",
+                    // prop: "controls",
+                    // frozenRight: true,
+                    cellRenderer: function (scope) {
+                        if (scope.$row.deleted_at !== null) {
+                            return '<button class="btn-inline"><i class="fa fa-undo" ng-click="doUndo($row)"></i></button>';
+                        } else {
+                            return '<button class="btn-inline"><i class="fa fa-trash" ng-click="doDelete($row)"></i></button>';
+                        }
+                    }
+                }
+            ]
+        };
+
+        $scope.selected = [];
+        $scope.onSelect = function (row) {
+            console.log('ROW SELECTED!', row);
+        };
+        $scope.onRowClick = function (row) {
+            console.log('ROW CLICKED', row);
+        };
+        $scope.doUndo = function (row) {
+            console.log('UNDO CLICKED', row);
+        }
+        $scope.doDelete = function (row) {
+            console.log('DELETE CLICKED', row);
+        }
+
+        CategoriesService
+            .getCategories()
+            .then(function (categoriesData) {
+                $scope.categoriesData = categoriesData.sort(
+                    function compareObject(objA, objB) {
+                        if (objA.name < objB.name) {
+                            return -1;
+                        }
+
+                        if (objA.name > objB.name) {
+                            return 1;
+                        }
+
+                        return 0;
+                    }
+                );
+                console.log(categoriesData);
+            });
     }]);

@@ -1,8 +1,11 @@
-<p>This is the partial for Categories.</p>
-<p>
-    Showing Categories
-</p>
-
-<ul>
-    <li ng-repeat="item in categoriesData">{{ item.name }}</li>
-</ul>
+<div ng-app="Cineboard" class="categories">
+    <h2>Showing Categories</h2>
+    <div ng-controller="CategoriesController">
+        <div class="wrapper">
+            <dtable options="options" rows="categoriesData" class="material"></dtable>
+        </div>
+    </div>
+    <p>
+        <a class="btn btn-primary" ng-href="#!/new-category">Add category</a>
+    </p>
+</div>
