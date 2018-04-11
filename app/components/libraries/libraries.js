@@ -9,7 +9,14 @@ angular.module('Cineboard.libraries', ['ngRoute', 'data-table'])
         });
     }])
 
-    .controller('LibrariesController', ['$scope', 'LibrariesService', function ($scope, LibrariesService) {
+    .config(['$routeProvider', function ($routeProvider) {
+        $routeProvider.when('/new-library', {
+            templateUrl: 'components/libraries/new-library.html',
+            controller: 'LibrariesController'
+        });
+    }])
+
+    .controller('LibrariesController', function ($rootScope, $scope, LibrariesService, $location) {
         $scope.options = {
             rowHeight: 100,
             footerHeight: false,
@@ -36,15 +43,26 @@ angular.module('Cineboard.libraries', ['ngRoute', 'data-table'])
                 prop: "notes"
             }]
         };
+
         $scope.selected = [];
         $scope.onSelect = function (row) {
             console.log('ROW SELECTED!', row);
         };
+
         $scope.onRowClick = function (row) {
             console.log('ROW CLICKED', row);
         };
+
         LibrariesService.getLibraries().then(function (librariesData) {
             $scope.librariesData = librariesData;
             console.log(librariesData);
         });
-    }]);
+
+        $scope.saveLibrary = function (library) {
+            if (library.title) {
+                LibrariesService.saveLibrary(library).then(function (librariesData) {
+                    $location.path('/libraries');
+                });
+            }
+        };
+    });
