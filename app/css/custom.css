@@ -107,3 +107,34 @@ body {
   line-height: 14px;
   margin: 0px 0px 0px 0px;
 }
+
+.row-deleted {
+  /* text-decoration: line-through; */
+  color: darkgray;
+  font-style: italic;
+}
+
+.row-deleted button {
+  color: #333;
+  /* font-style: italic; */
+}
+
+.btn-inline {
+  background: #F79522;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  border: none;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}

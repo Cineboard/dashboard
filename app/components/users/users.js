@@ -17,6 +17,11 @@ angular.module('Cineboard.users', ['ngRoute', 'data-table'])
     }])
 
     .controller('UsersController', function ($rootScope, $scope, UsersService, $location) {
+        /**
+         * Users default empty state
+         */
+        $scope.usersData = [];
+
         $scope.options = {
             rowHeight: 50,
             footerHeight: false,
@@ -29,20 +34,38 @@ angular.module('Cineboard.users', ['ngRoute', 'data-table'])
                 width: 200,
             }]
         };
+
         $scope.onRowClick = function (row) {
             console.log('ROW CLICKED', row);
         };
+
         UsersService.getUsers().then(function (usersData) {
-            $scope.usersData = usersData.splice(0, 10);
+            $scope.usersData = usersData
+                .splice(0, 10)
+                .sort(
+                    function compareObject(objA, objB) {
+                        if (objA.name < objB.name) {
+                            return -1;
+                        }
+
+                        if (objA.name > objB.name) {
+                            return 1;
+                        }
+
+                        return 0;
+                    }
+                );;
             console.log(usersData);
         });
+
         $scope.setUser = function (user) {
             console.log(user.name);
             $rootScope.currentUser = user;
             $location.path('/libraries');
         };
-        $scope.saveUser = function(user){
-            if(user.name){
+
+        $scope.saveUser = function (user) {
+            if (user.name) {
                 UsersService.saveUser(user.name).then(function (usersData) {
                     $location.path('/');
                 });
