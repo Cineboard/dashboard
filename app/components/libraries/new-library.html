@@ -1,19 +1,35 @@
 <h2>New Library</h2>
-<form>
-    <label for="title">Title</label>
-    <input required type="text" ng-model="library.title">
-    <label for="director">Director</label>
-    <input type="text" ng-model="library.director">
-    <label for="rating">Rating</label>
-    <input type="number" min=0 max=10 ng-model="library.rating">
-    <label for="viewed">Viewed</label>
-    <input type="number" min=0 max=1 ng-model="library.viewed">
-    <label for="tags">Tags</label>
-    <input type="text" ng-model="library.tags">
-    <label for="url">Url</label>
-    <input type="text" ng-model="library.url">
-    <button class="btn btn-primary" type="submit" ng-click="saveLibrary(library)">Save</button>
+<form class="new-library">
+    <div>
+        <label for="title">Title</label>
+        <input required type="text" maxlength="200" id="textbox" ng-model="library.title">
+    </div>
+    <div>
+        <label for="director">Director</label>
+        <input required type="text" maxlength="50" id="textbox" ng-model="library.director">
+    </div>
+    <div>
+        <label for="rating">Rating</label>
+        <input required type="number" min=0 max=10 ng-model="library.rating">
+        <label for="viewed">Viewed</label>
+        <input required type="number" min=0 max=1 ng-model="library.viewed">
+    </div>
+    <div>
+        <label for="url">Url</label>
+        <input required type="text" maxlength="300" id="textbox" ng-model="library.url">
+    </div>
+    <div>
+        <label for="tags">Tags</label>
+        <input required type="text" maxlength="200" id="textbox" ng-model="library.tags">
+    </div>
+    <div>
+        <label for="notes">Notes</label>
+        <input required type="text" maxlength="300" id="textbox" ng-model="library.notes">
+    </div>
+    <div class="btn-wrapper">
+        <button class="btn btn-primary" type="submit" ng-click="saveLibrary(library)">Save</button>
+    </div>
 </form>
 <p>
-    <a class="btn btn-primary" ng-href="#!/">All libraries</a>
+    <a class="btn btn-primary" ng-href="#!/libraries">All libraries</a>
 </p>

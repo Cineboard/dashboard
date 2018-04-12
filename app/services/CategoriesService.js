@@ -4,10 +4,21 @@ app.factory('CategoriesService', function ($http, CONFIG) {
     return {
 
         getCategories: function () {
-            return $http.get(CONFIG.API_URL + '/categories')
+            return $http
+                .get(
+                    CONFIG.API_URL + '/categories')
                 .then(function (result) {
                     return result.data;
                 });
+        },
+
+        saveCategory: function (category) {
+            return $http
+                .post(
+                    CONFIG.API_URL + '/categories',
+                    {
+                        'name': category.name
+                    });
         },
 
         deleteCategory: function (categoryId, name) {
@@ -33,5 +44,6 @@ app.factory('CategoriesService', function ($http, CONFIG) {
                     }
                 );
         }
+
     };
 });

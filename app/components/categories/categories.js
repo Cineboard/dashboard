@@ -2,17 +2,29 @@
 
 angular.module('Cineboard.categories', ['ngRoute'])
 
-    .config(['$routeProvider', function ($routeProvider) {
+    .config(function ($routeProvider) {
         $routeProvider.when('/categories', {
             templateUrl: 'components/categories/categories.html',
             controller: 'CategoriesController'
         });
-    }])
+    })
 
-    .controller('CategoriesController', ['$scope', 'CategoriesService', function ($scope, CategoriesService) {
+    .config(function ($routeProvider) {
+        $routeProvider.when('/new-category', {
+            templateUrl: 'components/categories/new-category.html',
+            controller: 'CategoriesController'
+        });
+    })
+
+    .controller('CategoriesController', function ($rootScope, $scope, CategoriesService, $location) {
         /**
          * Categories default empty state
          */
+        if (!$rootScope.currentUser) {
+            $location.path('/');
+            return false;
+        }
+
         $scope.categoriesData = [];
 
         /**
@@ -25,10 +37,7 @@ angular.module('Cineboard.categories', ['ngRoute'])
             columnMode: 'force',
             headerHeight: 50,
             columns: [
-                // {
-                //     name: "#",
-                //     prop: "id"
-                // },
+
                 {
                     name: "Category",
                     prop: "name",
@@ -74,9 +83,6 @@ angular.module('Cineboard.categories', ['ngRoute'])
                     }
                 },
                 {
-                    // name: "controls",
-                    // prop: "controls",
-                    // frozenRight: true,
                     cellRenderer: function (scope) {
                         if (scope.$row.deleted_at !== null) {
                             return '<button class="btn-inline"><i class="fa fa-undo" ng-click="doUndo($row)"></i></button>';
@@ -88,13 +94,10 @@ angular.module('Cineboard.categories', ['ngRoute'])
             ]
         };
 
-        $scope.selected = [];
-        $scope.onSelect = function (row) {
-            console.log('ROW SELECTED!', row);
-        };
         $scope.onRowClick = function (row) {
             console.log('ROW CLICKED', row);
         };
+
         $scope.doUndo = function (row) {
             console.log('UNDO CLICKED', row.id, row.name);
 
@@ -125,6 +128,7 @@ angular.module('Cineboard.categories', ['ngRoute'])
                     }
                 )
         }
+
         $scope.doDelete = function (row) {
             console.log('DELETE CLICKED', row.id, row.name);
             CategoriesService
@@ -152,8 +156,8 @@ angular.module('Cineboard.categories', ['ngRoute'])
                                 console.log(categoriesData);
                             });
                     }
-                )
-        }
+                );
+        };
 
         CategoriesService
             .getCategories()
@@ -173,4 +177,14 @@ angular.module('Cineboard.categories', ['ngRoute'])
                 );
                 console.log(categoriesData);
             });
-    }]);
+
+            $scope.saveCategory = function (category) {
+                if (typeof category.name !== 'undefined') {
+                    CategoriesService
+                        .saveCategory(category)
+                        .then(function (categoriesData) {
+                            $location.path('/categories');
+                        });
+                }
+            };
+        });

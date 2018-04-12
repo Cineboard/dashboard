@@ -1,0 +1,23 @@
+<div ng-init="loadLibrary(id)" class="new-library">
+    <div>
+        <h2 ng-model="library.title">Title: {{ library.title }}</h2>
+    </div>
+    <div>
+            <h2 ng-model="library.director">Director: {{ library.director }}</h2>
+    </div>
+    <div>
+        <h2 ng-model="library.rating">Rating: {{ library.rating }}</h2>
+    </div>
+    <div>
+        <h2 ng-model="library.viewed">Viewed: {{ library.viewed }}</h2>
+    </div>
+    <div>
+        <h3 ng-model="library.tags">Tags: {{ library.tags }}</h3>
+    </div>
+    <div>
+        <p ng-model="library.notes">Notes: {{ library.notes }}</p>
+    </div>
+        <p>
+            <a class="btn btn-primary" ng-href="#!/libraries">Edit library</a>
+        </p>
+</div>
