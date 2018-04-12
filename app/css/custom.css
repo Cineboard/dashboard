@@ -138,3 +138,17 @@ body {
 .text-center {
   text-align: center;
 }
+
+.new-library {
+  text-align: left;
+  width: 400px;
+  margin: auto;
+}
+
+.new-library .btn-wrapper {
+  text-align: center;
+}
+
+.new-library div {
+  margin-bottom: 10px;
+}

@@ -12,11 +12,11 @@ var app = angular.module('Cineboard', [
   'Cineboard.version'
 ])
 
-  .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
+  .config(function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
 
     $routeProvider.otherwise({ redirectTo: '/users' });
-  }])
+  })
 
   .factory('httpLoaderInterceptor', ['$rootScope', function ($rootScope) {
     // Active request count
@@ -61,9 +61,11 @@ var app = angular.module('Cineboard', [
       'responseError': endRequest
     };
   }])
+
   .config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('httpLoaderInterceptor');
   }])
+
   .directive('httpLoader', function () {
     return {
       restrict: 'EA',

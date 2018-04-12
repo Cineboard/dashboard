@@ -1,0 +1,9 @@
+<h2>New Category</h2>
+<form>
+    <label for="name">Category</label>
+    <input required type="text" maxlength="200" id="textbox" ng-model="category.name">
+    <button class="btn btn-primary" type="submit" ng-click="saveCategory(category)">Save</button>
+</form>
+<p>
+    <a class="btn btn-primary" ng-href="#!/categories">All categories</a>
+</p>
