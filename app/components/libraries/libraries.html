@@ -1,5 +1,8 @@
 <div ng-app="Cineboard">
     <div ng-controller="LibrariesController">
+        <p>
+            <a class="btn btn-primary" ng-href="#!/new-library">Add library</a>
+        </p>
         <div class="wrapper">
             <dtable options="options" rows="librariesData" on-row-click="onRowClick(row)" class="material"</dtable>
                 <ul>
@@ -7,7 +10,4 @@
                 </ul>
             </div>
         </div>
-        <p>
-            <a class="btn btn-primary" ng-href="#!/new-library">Add library</a>
-        </p>
     </div>
