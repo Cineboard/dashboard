@@ -1,4 +1,6 @@
-image: node:8.9.4
+stages:
+  - test
+  - deploy
 
 cache:
   key: one-key-to-roll-them-all-and-quickly-smoke
@@ -6,12 +8,9 @@ cache:
   - node_modules/
   - app/bower_components/
 
-stages:
-  - test
-  - deploy
-
 test:node8.9:
   stage: test
+  image: node:8.9.4
   before_script:
     # Add Google Chrome to aptitude's (package manager) sources
     - echo "deb http://dl.google.com/linux/chrome/deb/ stable main" | tee -a /etc/apt/sources.list
@@ -46,22 +45,14 @@ test:node8.9:
 
 deploy_demo:
   stage: deploy
-  dependencies:
-    - test:node8.9
+  image: debian:9.4-slim
   script:
     # Update package sources
     - apt-get -qq update -y
     - apt-get -qq install -y openssh-client
-    # run ssh-agent
     - eval $(ssh-agent -s)
-    # use CI SECRETS VAR
-    # add ssh key stored in SSH_KEY_TESTING_ENV variable to the agent store
-    - ssh-add - <<<"$SSH_KEY_DEMO"
-    # disable host key checking (NOTE: makes you susceptible to man-in-the-middle attacks)
-    # WARNING: use only in docker container, if you use it with shell you will overwrite your user's ssh config
-    - mkdir -p ~/.ssh
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-    - ssh $SSH_USER_DEMO@cineboard.firegarden.co bash deploy.sh
+    - ssh-add - <<<"$SSH_KEY_DEMO" > /dev/null
+    - ssh -o StrictHostKeyChecking=no -p $SSH_PORT_DEMO $SSH_USER_DEMO@cineboard.firegarden.co bash deploy.sh &>/dev/null
     - echo yay
   environment:
     name: demo
